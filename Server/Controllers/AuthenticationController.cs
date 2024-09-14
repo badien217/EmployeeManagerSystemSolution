@@ -1,4 +1,5 @@
 ﻿using BaseLibrary.DTOs;
+using BaseLibrary.Entities;
 using Microsoft.AspNetCore.Mvc;
 using ServerLibrary.Reponsitories.Contracts;
 
@@ -24,6 +25,14 @@ namespace Server.Controllers
         {
             if (user == null) return BadRequest("Model is empty");
             var results = await accountInterface.SignInAsync(user);
+            return Ok(results);
+
+        }
+        [HttpPost("RefreshToken")]
+        public async Task<IActionResult> RefreshToken(RefreshToken user)
+        {
+            if (user == null) return BadRequest("Model is empty");
+            var results = await accountInterface.RefreshTokenAsync(user);
             return Ok(results);
 
         }

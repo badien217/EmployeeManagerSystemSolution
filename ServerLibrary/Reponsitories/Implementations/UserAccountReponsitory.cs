@@ -81,6 +81,13 @@ namespace ServerLibrary.Reponsitories.Implementations
 
             string jwtToken = GenerateToken(applucationUser, getRoleName!.Name);
             string refreshToken = GenerateRefreshToken();
+            var findUser = await appDbContext.RefreshTokenInfos.FirstOrDefaultAsync(
+                _ => _.UserId == applucationUser.Id);
+            if(findUser is not null)
+            {
+                findUser!.Token = refreshToken;
+                await appDbContext.SaveChangesAsync();
+            }
             return new LoginResponse(true, "Login successfully", jwtToken, refreshToken);
         }
         private string GenerateToken(ApplicationUser user,string role)
