@@ -1,5 +1,7 @@
 ﻿@using System.Net.Http
 @using System.Net.Http.Json
+@using ClientLibrary.Services.Contracts
+@using ClientLibrary.Services.Implementations
 @using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.AspNetCore.Components.Routing
 @using Microsoft.AspNetCore.Components.Web
@@ -8,3 +10,11 @@
 @using Microsoft.JSInterop
 @using Client
 @using Client.Layout
+@using BaseLibrary.DTOs
+@using ClientLibrary.Helper
+@inherits LayoutComponentBase
+@inject AuthenticationStateProvider AuthStateProvider
+@using Microsoft.AspNetCore.Components.Authorization
+@inject NavigationManager NavManager
+@inject IUserAccountServices accountServices
+@using ClientLibrary.Services.Contracts

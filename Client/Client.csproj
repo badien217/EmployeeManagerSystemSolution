@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -14,11 +14,19 @@
 	  
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.8" PrivateAssets="all" />
+    <PackageReference Include="Syncfusion.Blazor.Buttons" Version="23.1.36" />
+    <PackageReference Include="Syncfusion.Blazor.Popups" Version="23.1.36" />
+    <PackageReference Include="Syncfusion.Blazor.Themes" Version="23.1.36" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BaseLibrary\BaseLibrary.csproj" />
     <ProjectReference Include="..\ClientLibrary\ClientLibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\companylogo\" />
+    <Folder Include="wwwroot\images\profile\" />
   </ItemGroup>
 
 </Project>

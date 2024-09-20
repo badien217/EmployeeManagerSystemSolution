@@ -12,7 +12,7 @@ namespace ClientLibrary.Helper
         private const string HeaderKey = "Authorization";
         public async Task<HttpClient> GetPrivateHttpClient()
         {
-            var client = httpClientFactory.CreateClient("SystemsApiClient ");
+            var client = httpClientFactory.CreateClient("SystemsApiClient");
             var stringToken = await localStorageServices.GetToken();
             if (string.IsNullOrEmpty(stringToken)) return client;
             var deserializeToken = Serializations.DeserializeJsonString<UserSession>(stringToken);
@@ -22,7 +22,7 @@ namespace ClientLibrary.Helper
         }
         public HttpClient GetPublicHttpClient()
         {
-            var client = httpClientFactory.CreateClient("SystemApiClient");
+            var client = httpClientFactory.CreateClient("SystemsApiClient");
             client.DefaultRequestHeaders.Remove(HeaderKey);
             return client;
         }

@@ -15,24 +15,27 @@ namespace ClientLibrary.Services.Implementations
 {
     public class UserAccountServices(GetHttpClient getHttpClient) : IUserAccountServices
     {
-        public const string AuthUrl = "api/authentication";
+        public const string AuthUrl = "api/Authentication";
 
         public async Task<GeneralResponse> CreateAsync(Register user)
         {
             var httpClient = getHttpClient.GetPublicHttpClient();
-            var result = await httpClient.PostAsJsonAsync($"{AuthUrl}/register", user);
+            var result = await httpClient.PostAsJsonAsync($"{AuthUrl}/Register", user);
             if (!result.IsSuccessStatusCode) return new GeneralResponse(false, "Error occured");
             return await result.Content.ReadFromJsonAsync<GeneralResponse>()!;
         }
-        public Task<LoginResponse> RefreshTokenAsync(RefreshToken user)
+        public async Task<LoginResponse> RefreshTokenAsync(RefreshToken user)
         {
-            throw new NotImplementedException();
+            var httpClient = getHttpClient.GetPublicHttpClient();
+            var result = await httpClient.PostAsJsonAsync($"{AuthUrl}/RefreshToken", user);
+            if (!result.IsSuccessStatusCode) return new LoginResponse(false, "Error occured");
+            return await result.Content.ReadFromJsonAsync<LoginResponse>()!;
         }
 
         public async Task<LoginResponse> SignInAsync(Login user)
         {
             var httpClient = getHttpClient.GetPublicHttpClient();
-            var result = await httpClient.PostAsJsonAsync($"{AuthUrl}/login", user);
+            var result = await httpClient.PostAsJsonAsync($"{AuthUrl}/Login", user);
             if (!result.IsSuccessStatusCode) return new LoginResponse(false, "Error occured");
             return await result.Content.ReadFromJsonAsync<LoginResponse>();
         }

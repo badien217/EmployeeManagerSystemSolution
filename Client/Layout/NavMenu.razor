@@ -1,6 +1,14 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+﻿@page "/nav"
+@using Microsoft.AspNetCore.Components.Authorization
+<AuthorizeView>
+    <Authorized>
+    <div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="">Client</a>
+        <a class="navbar-brand" href="">
+            Welcome ,@context.User.Identity!.Name
+            
+
+        </a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -8,32 +16,113 @@
 </div>
 
 <div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
-    <nav class="flex-column">
+   <nav class="flex-column">
+       <div class="nav-item px-3">
+           <NavLink class="nav-link p-2" href="/home/dashboard">
+               <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span>Home
+           </NavLink>
+       </div>
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Counter
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="weather">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
-            </NavLink>
-        </div>
-    </nav>
-</div>
+           <NavLink class="nav-link p-2" href="/home/dashboard">
+               <span class="bi bi-house-plus-square-nav-menu" aria-hidden="true"></span>Counter
+           </NavLink>
+       </div>
+       <div class="nav-item px-3">
+           <NavLink class="nav-link p-2" @onclick="ShowAdminMenuContainer" style="cursor:pointer;" href="javascript:void()">
+               <div class="hstack gap-1">
+                    <span class="bi bi-person-fill fs-3 text-center" aria-hidden="true" style="margin-top:-2rem"></span>
+                    <span>Administration</span>
+               </div>
+           </NavLink>
+           <a class="nav-link p-2 text-white" style="margin-left:5rem;visibility:@CssStyle">
+               <div class="hstack"></div>
+                    <span class="bi bi-backpack-fill fs-5 text-center" aria-hidden="true" style="margin-top:-2rem"</span>
+                    <span>User</span>
+           </a>
+       </div>
+       <div class="nav-item px-3" style="margin-top:@DepartmentMargin">
+                    <NavLink class="nav-link p-2" @onclick="ShowDepartmantContainer" style="cursor:pointer;" href="javascript:void()">
+                        <div class="hstack gap-1">
+                            <span class="bi bi-person-fill fs-3 text-center" aria-hidden="true" style="margin-top:-2rem"></span>
+                            <span>Department</span>
+                        </div>
+                    </NavLink>
+                    <div class="nav-link p-2 text-white" style="margin-left:5rem;visibility:@DepartmentCssStyle">
+                        <ul class="list-group">
+                            <li style="list-style:none" class="cursorStyle">
+                                <a class="nav-link p-2" @onclick="GeneralDepartmentClicked">
+                                    <div class="hstack text-wrap">
+                                        <span class="bi bi-file-medical fs-5 text-center" aria-hidden="true" style="margin-top:-2rem"></span>
+                                        <span class="fs-6">Generel</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li style="list-style:none" class="cursorStyle">
+                                <a class="nav-link p-2" >
+                                    <div class="hstack">
+                                        <span class="bi bi-substack fs-5 text-center" aria-hidden="true" style="margin-top:-2rem"></span>
+                                        <span >Department</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li style="list-style:none" class="cursorStyle">
+                                <a class="nav-link p-2">
+                                    <div class="hstack">
+                                        <span class="bi bi-substack fs-5 text-center" aria-hidden="true" style="margin-top:-2rem"></span>
+                                        <span>Branch</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
 
+                    </div>
+
+       </div>
+   </nav>
+</div>
+    </Authorized>
+</AuthorizeView>
+    
 @code {
     private bool collapseNavMenu = true;
 
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+    private string DepartmentMargin { get; set; } = "-3.5rem";
 
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
     }
+    private string CssStyle = "hidden";
+    private bool ShowHide { get; set; } = false;
+    private void ShowAdminMenuContainer()
+    {
+        ShowHide = !ShowHide;
+        if(ShowHide)
+        {
+            DepartmentMargin = "0";
+            CssStyle = "visible";
+        }
+        else
+        {
+            DepartmentMargin = "-3.5rem";
+            CssStyle = "hidden";
+        }
+
+    }
+    private string DepartmentCssStyle = "hidden";
+    public bool ShowHiddenDepartment { get; set; } = false;
+    public void ShowDepartmantContainer()
+    {
+        ShowHiddenDepartment = !ShowHiddenDepartment;
+        if (ShowHiddenDepartment)
+            DepartmentCssStyle = "visible";
+        else
+            DepartmentCssStyle = "hidden";
+    }
+    void GeneralDepartmentClicked()
+    {
+        
+    }
+
 }
