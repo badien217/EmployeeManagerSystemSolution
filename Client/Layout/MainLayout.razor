@@ -1,16 +1,16 @@
 ﻿@using Microsoft.AspNetCore.Authorization
 @inherits LayoutComponentBase
 @attribute [Authorize]
+@using Client.Pages.OtherPages;
 <div class="page">
     <div class="sidebar">
         <NavMenu />
     </div>
-
     <main>
         <div class="top-row px-4">
-            <Client.Pages.OtherPages.ProfilePropDown></Client.Pages.OtherPages.ProfilePropDown>
-           
-            
+            <ProfilePropDown></ProfilePropDown>
+
+
         </div>
 
         <article class="content px-4">
@@ -18,13 +18,13 @@
         </article>
     </main>
 </div>
-<Syncfusion.Blazor.Popups.SfDialogProvider/>
-@code{
+<Syncfusion.Blazor.Popups.SfDialogProvider />
+@code {
     async Task LogoutClicked()
     {
         var logoutModel = new UserSession();
         var customAuthStateProvider = (CustomAuthenticationStateProvider)AuthStateProvider;
         await customAuthStateProvider.UpdateAuthenticationState(logoutModel);
-        NavManager.NavigateTo("/", forceLoad: true);
+        NavManager.NavigateTo("/identity/account/login", replace: true, forceLoad: true);
     }
 }

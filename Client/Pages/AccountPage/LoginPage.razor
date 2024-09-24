@@ -67,13 +67,7 @@
     {
         await CheckUserAuthentication();
     }
-    private async Task CheckUserAuthentication()
-    {
-        var user = (await AuthenticationState).User;
-        bool isUserAuthenticated = user.Identity!.IsAuthenticated;
-        if (!isUserAuthenticated)
-            NavManager.NavigateTo("/home/dashboard");
-    }
+
     async Task HandleLogin()
     {
         ShowLoadingBuuton = true;
@@ -96,5 +90,17 @@
     private async Task DisplayDialog(string content,string title)
     {
         await DialogService.AlertAsync(content, title);
+    }
+    private async Task CheckUserAuthentication()
+    {   
+        var userTask = await AuthenticationState; 
+        var user = (userTask).User;
+
+
+        if (user != null && user.Identity != null )
+    {
+            NavManager.NavigateTo("/home/dashboard");
+            
+        }
     }
 }

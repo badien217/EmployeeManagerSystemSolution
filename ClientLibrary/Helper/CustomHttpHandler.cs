@@ -22,7 +22,6 @@ namespace ClientLibrary.Helper
             {
                 var stringToken = await localStorageServices.GetToken();
                 if (stringToken == null) return result;
-                //check if hearder contained token
                 string token = string.Empty;
                 try { token = request.Headers.Authorization!.Parameter!; }
                 catch { }

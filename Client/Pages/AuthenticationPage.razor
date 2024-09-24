@@ -5,10 +5,16 @@
     [CascadingParameter] public Task<AuthenticationState> AuthenticationState { get; set; }
     protected async override Task OnInitializedAsync()
     {
-        var user = (await AuthenticationState).User;
-        if (user.Identity!.IsAuthenticated)
+        var authenticationState = await AuthenticationState;
+        if (authenticationState!= null && authenticationState.User != null && authenticationState.User.Identity != null)
+        {
+            var user = authenticationState.User;
             NavManager.NavigateTo("/home/dashboard");
+        }
         else
+        {
+            
             NavManager.NavigateTo("/identity/account/login");
+        }
     }
 }

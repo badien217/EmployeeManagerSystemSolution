@@ -76,8 +76,8 @@
     {
         var user = (await AuthenticationState).User;
         bool isUserAuthenticated = user.Identity!.IsAuthenticated;
-        if (!isUserAuthenticated)
-            NavManager.NavigateTo("/home/daskboard");
+        if (isUserAuthenticated)
+            NavManager.NavigateTo("/home/dashboard");
     }
     async Task HandlerRegister()
     {
