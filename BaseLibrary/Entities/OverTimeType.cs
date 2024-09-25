@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace BaseLibrary.Entities
 {
-    public class RefreshToken
+    public class OverTimeType :BaseEntity
     {
-        public string? Token { get; set; }
+
     }
 }

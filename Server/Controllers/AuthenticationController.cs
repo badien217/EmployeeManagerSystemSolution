@@ -1,5 +1,4 @@
 ﻿using BaseLibrary.DTOs;
-using BaseLibrary.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ServerLibrary.Reponsitories.Contracts;

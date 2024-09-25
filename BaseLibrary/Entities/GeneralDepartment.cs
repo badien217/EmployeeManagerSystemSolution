@@ -8,6 +8,6 @@ namespace BaseLibrary.Entities
 {
     public class GeneralDepartment :BaseEntity
     {
-
+        public List<GeneralDepartment>? Departments { get; set; }
     }
 }

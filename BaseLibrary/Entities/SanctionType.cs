@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace BaseLibrary.Entities
 {
-    public class Branch :BaseEntity
+    public class SanctionType:BaseEntity
     {
-        public GeneralDepartment? Department { get; set; }
-        public int DepartmentId { get; set; }
+        public List<Sanction>? Sanctions { get; set; }
     }
 }

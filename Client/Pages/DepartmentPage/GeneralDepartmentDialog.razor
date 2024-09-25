@@ -1,8 +1,7 @@
-﻿@page "/ass"
-@using Syncfusion.Blazor.Buttons
+﻿@using BaseLibrary.Entities
 @using Syncfusion.Blazor.Popups
 @inject SfDialogService dialogServices
-<SfDialog Width="350px" IsModal="true" ShowCloseIcon="true" @bind-Visible="IsVisible">
+<SfDialog Width="350px" IsModal="true" ShowCloseIcon="true" @bind-Visible="IsVisible" >
     <DialogEvents OnOpen="OpenDialog"></DialogEvents>
     <DialogTemplates>
         <Header>
@@ -27,7 +26,7 @@
 </SfDialog>
 
 @code {
-    [Parameter] public GeneralDepartmentDTO Department { get; set; } = new();
+    [Parameter] public GeneralDepartment Department { get; set; } = new();
     public bool IsVisible { get; set; } = false;
 
     public void OpenDialog()

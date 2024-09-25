@@ -1,5 +1,4 @@
 ﻿using BaseLibrary.DTOs;
-using BaseLibrary.Entities;
 using BaseLibrary.Reponses;
 using System;
 using System.Collections.Generic;

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BaseLibrary.DTOs
+namespace BaseLibrary.Entities
 {
-    public class GeneralDepartmentDTO : BaseDepartmentDto
+    public class Country:BaseEntity
     {
-
+        public List<City>? cities {  get; set; }
     }
 }
