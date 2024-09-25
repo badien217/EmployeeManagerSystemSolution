@@ -9,6 +9,7 @@ using ClientLibrary.Services.Implementations;
 using Syncfusion.Blazor.Popups;
 using Syncfusion.Blazor;
 using Client.ApplicationState;
+using BaseLibrary.Entities;
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
@@ -26,5 +27,15 @@ builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStat
 builder.Services.AddScoped<IUserAccountServices, UserAccountServices>();
 builder.Services.AddScoped<SfDialogService>();
 builder.Services.AddScoped<DepartmentState>();
+builder.Services.AddScoped<IGenericServiceInterface<GeneralDepartment>, GenericServiceImplemetation<GeneralDepartment>>();
+builder.Services.AddScoped<IGenericServiceInterface<Branch>, GenericServiceImplemetation<Branch>>();
+builder.Services.AddScoped<IGenericServiceInterface<Department>, GenericServiceImplemetation<Department>>();
+
+builder.Services.AddScoped<IGenericServiceInterface<Country>, GenericServiceImplemetation<Country>>();
+builder.Services.AddScoped<IGenericServiceInterface<City>, GenericServiceImplemetation<City>>();
+builder.Services.AddScoped<IGenericServiceInterface<Town>, GenericServiceImplemetation<Town>>();
+
+builder.Services.AddScoped<IGenericServiceInterface<Employee>, GenericServiceImplemetation<Employee>>();
+
 builder.Services.AddSyncfusionBlazor();
 await builder.Build().RunAsync();

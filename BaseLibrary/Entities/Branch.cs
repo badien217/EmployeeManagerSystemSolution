@@ -8,7 +8,7 @@ namespace BaseLibrary.Entities
 {
     public class Branch :BaseEntity
     {
-        public GeneralDepartment? Department { get; set; }
+        public Department? Department { get; set; }
         public int DepartmentId { get; set; }
     }
 }
