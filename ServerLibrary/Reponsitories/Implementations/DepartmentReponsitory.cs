@@ -23,7 +23,8 @@ namespace ServerLibrary.Reponsitories.Implementations
             return Success();
         }
 
-        public async Task<List<Department>> GetAll() => await appDbContext.Departments.ToListAsync();
+        public async Task<List<Department>> GetAll() => await appDbContext.Departments
+            .AsNoTracking().Include(x => x.GeneralDepartment).ToListAsync();
 
 
         public async Task<Department> GetById(int Id) => await appDbContext.Departments.FindAsync(Id);
@@ -31,7 +32,8 @@ namespace ServerLibrary.Reponsitories.Implementations
 
         public async Task<GeneralResponse> Insert(Department item)
         {
-            if (!await CheckName(item.Name!)) return new GeneralResponse(false, "Department already added");
+            var checkIsNull = await CheckName(item.Name);
+            if (checkIsNull) return new GeneralResponse(false, "Department already added");
             appDbContext.Departments.Add(item);
             await Commit();
             return Success();
@@ -50,8 +52,8 @@ namespace ServerLibrary.Reponsitories.Implementations
         private async Task Commit() => await appDbContext.SaveChangesAsync();
         private async Task<bool> CheckName(string name)
         {
-            var item = await appDbContext.Departments.FirstOrDefaultAsync(x => x.Name!.ToLower().Equals(name.ToLower()));
-            return item is null;
+            var item = await appDbContext.GeneralDepartments.FirstOrDefaultAsync(x => x.Name!.ToLower().Equals(name.ToLower()));
+            return item is null ? true : false;
         }
     }
 }

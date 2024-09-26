@@ -12,7 +12,7 @@
                             <i class="bi bi-plus-circle"></i>Add Department
                         </button>
                     </div>
-                    <div class="card-header">
+                    <div class="card-header" style="max-height:580px ;overflow-x:hidden;overflow-y:scroll">
                         <div class="card-body">
                             <table class="table table-striped">
                                 <thead>
@@ -25,23 +25,23 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <th>Otto</th>
-                                        <th>mdo</th>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Jakoc</td>
-                                        <th>Thornton</th>
-                                        <th>mdo</th>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <th colspan="2">Larry the bird</th>
-                                        <th>mdo</th>
-                                    </tr>
+                                    @if(GeneralDepartments is  not null)
+                                    {
+                                        int count = 1;
+                                        foreach(var item in GeneralDepartments)
+                                        {
+                                            <tr>
+                                                <th scope="row">@count</th>
+                                                <td>@item.Id</td>
+                                                <td>@item.Name</td>
+                                                <td>
+                                                    <i class="bi bi-pencil text-info" id="cursorStyle" @onclick="() => EditClicked(item)"></i>
+                                                    <i class="bi bi-trash text-danger" id="cursorStyle" @onclick="() => DeleteClicked(item)"></i>
+                                                </td>
+                                            </tr>
+                                            count++;
+                                        }
+                                    }
                                 </tbody>
                             </table>
                         </div>
@@ -53,20 +53,85 @@
         </div>
     </div>
 }
-
+<GeneralDepartmentDialog @ref="generalDepartmentDialog"
+                         HandleSaveOperationEvent="HandleSaveOperationEvent"
+                         GeneralDepartment="GeneralDepartment"/>
+<style>
+    .cursorStyle{
+        cursor:pointer;
+    }
+</style>
 @code{
     GeneralDepartmentDialog? generalDepartmentDialog;
-    GeneralDepartment Department = new();
-   
-    protected override void OnInitialized()
+    GeneralDepartment GeneralDepartment = new();
+    public string title = "Add";
+    public List<GeneralDepartment> GeneralDepartments { get; set; } = new();
+    protected override async void OnInitialized()
     {
+        await GetGeneralDepartment();
         allState.Action += StateHasChanged;
+    }
+
+    private async Task GetGeneralDepartment()
+    {
+        GeneralDepartments = await generalDepartmentService.GetAll(Constants.GeneralDepartmentBaseUrl);
     }
     void OpenDialog()
     {
         generalDepartmentDialog?.OpenDialog();
-       
+
     }
+    private async Task HandleSaveOperationEvent(GeneralDepartment generalDepartment)
+    {
+        bool successCheck = false;
+        if (generalDepartment.Id > 0)
+        {
+            var result = await generalDepartmentService.Update(
+            GeneralDepartment, Constants.GeneralDepartmentBaseUrl);
+            successCheck = await DisplayMessage(result.Flag, result.Message);
+        }
+        else
+        {
+            var response = await generalDepartmentService.Insert(
+            generalDepartment, Constants.GeneralDepartmentBaseUrl);
+            successCheck = await DisplayMessage(response.Flag, response.Message);
+        }
+        if (successCheck)
+        {
+            GeneralDepartment = new();
+            await GetGeneralDepartment();
+            generalDepartmentDialog?.ChangeTile("Add");
+        }
+
+    }
+    private void EditClicked(GeneralDepartment dep)
+    {
+        generalDepartmentDialog?.ChangeTile("Update");
+        GeneralDepartment = dep;
+        OpenDialog();
+    }
+    private async Task DeleteClicked(GeneralDepartment dep)
+    {
+        bool confirm = await dialogServices.ConfirmAsync($"Are you sure you wanan delete {dep.Name}?", "Confirm Delete");
+        if (!confirm) return;
+        var response = await generalDepartmentService.DeleteById(dep.Id, Constants.GeneralDepartmentBaseUrl);
+        if (await DisplayMessage(response.Flag, response.Message))
+            await GetGeneralDepartment();
+
+    }
+    private async Task<bool> DisplayMessage(bool flag,string message)
+    {
+        if (flag)
+        {
+            await dialogServices.AlertAsync(message, "Success Operation");
+            return true;
+        }
+        else
+        {
+            await dialogServices.AlertAsync(message, "Alert");
+            return false;
+        }
+    } 
     public void Dispose()
     {
         allState.Action -= StateHasChanged;
@@ -74,4 +139,3 @@
     }
 
 }
-<GeneralDepartmentDialog @ref="generalDepartmentDialog" />

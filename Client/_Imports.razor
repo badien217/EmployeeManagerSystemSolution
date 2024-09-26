@@ -14,6 +14,7 @@
 @using Client.Layout
 @using BaseLibrary.DTOs
 @using ClientLibrary.Helper
+@using Syncfusion.Blazor.DropDowns
 @inherits LayoutComponentBase
 @inject AuthenticationStateProvider AuthStateProvider
 @using Microsoft.AspNetCore.Components.Authorization
@@ -25,6 +26,8 @@
 @inject IUserAccountServices accountServices
 @*//Sync dialog service*@
 @inject SfDialogService  dialogServices
+@using Client.Pages.ContentPages.DepartmentPage
+@using Client.Pages.OtherPages
 
 @*//General Department / department / Branch*@
 

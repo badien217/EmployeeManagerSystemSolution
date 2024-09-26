@@ -22,7 +22,7 @@ namespace Server.Controllers
             if (Id <= 0) return BadRequest("Invalid request send");
             return Ok(await genericReponsitoryInterface.GetById(Id));
         }
-        [HttpPost("add")]
+        [HttpPost("Add")]
         public async Task<IActionResult> Add(T model)
         {
             if (model is null) return BadRequest("Invalid request send");

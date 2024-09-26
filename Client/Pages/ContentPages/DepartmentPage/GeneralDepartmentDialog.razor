@@ -3,15 +3,15 @@
     <DialogEvents OnOpen="OpenDialog"></DialogEvents>
     <DialogTemplates>
         <Header>
-            Add Department
+            @Title Department
         </Header>
         <Content>
-            <EditForm Model="Department" OnSubmit="Save">
+            <EditForm Model="GeneralDepartment" OnSubmit="Save">
                 <div class="card border-success">
                     <div class="card-body">
                         <div class="form-group">
                             <label class="form-label">Name</label>
-                            <InputText @bind-Value="Department.Name" class="form-control"></InputText>
+                            <InputText @bind-Value="GeneralDepartment.Name" class="form-control"></InputText>
                         </div>
                     </div>
                 </div>
@@ -24,9 +24,10 @@
 </SfDialog>
 
 @code {
-    [Parameter] public GeneralDepartment Department { get; set; } = new();
+    [Parameter] public GeneralDepartment GeneralDepartment { get; set; } = new();
+    [Parameter] public EventCallback<GeneralDepartment> HandleSaveOperationEvent { get; set; } 
     public bool IsVisible { get; set; } = false;
-
+    public string Title { get; set; } = "Add";
     public void OpenDialog()
     {
         IsVisible = true;
@@ -35,10 +36,18 @@
 
     public async void Save()
     {
-        if (string.IsNullOrEmpty(Department.Name))
+        if (string.IsNullOrEmpty(GeneralDepartment.Name))
         {
             await dialogServices.AlertAsync("You need provide Department name", "Alert");
         }
+        else
+        {
+            await HandleSaveOperationEvent.InvokeAsync(GeneralDepartment);
+        }
+    }
+    public void ChangeTile (string title)
+    {
+        Title = title;
     }
 }
 
