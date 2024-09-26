@@ -26,7 +26,7 @@ builder.Services.AddScoped<LocalStorageServices>();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
 builder.Services.AddScoped<IUserAccountServices, UserAccountServices>();
 builder.Services.AddScoped<SfDialogService>();
-builder.Services.AddScoped<DepartmentState>();
+builder.Services.AddScoped<AllState>();
 builder.Services.AddScoped<IGenericServiceInterface<GeneralDepartment>, GenericServiceImplemetation<GeneralDepartment>>();
 builder.Services.AddScoped<IGenericServiceInterface<Branch>, GenericServiceImplemetation<Branch>>();
 builder.Services.AddScoped<IGenericServiceInterface<Department>, GenericServiceImplemetation<Department>>();

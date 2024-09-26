@@ -1,12 +1,7 @@
 ﻿
 @using BaseLibrary.Entities
-@using Client.ApplicationState
-@using Syncfusion.Blazor.Popups
-@implements IDisposable
-@inject DepartmentState departmentState
-@inject SfDialogService dialogServices
 
-@if (departmentState.ShowGeneralDepartment)
+@if (allState.ShowGeneralDepartment)
 {
     <div class="continer mt-5">
         <div class="row">
@@ -65,7 +60,7 @@
    
     protected override void OnInitialized()
     {
-        departmentState.GeneralDepartmentAction += StateHasChanged;
+        allState.Action += StateHasChanged;
     }
     void OpenDialog()
     {
@@ -74,7 +69,7 @@
     }
     public void Dispose()
     {
-        departmentState.GeneralDepartmentAction -= StateHasChanged;
+        allState.Action -= StateHasChanged;
 
     }
 
