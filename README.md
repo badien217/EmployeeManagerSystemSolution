@@ -5,8 +5,12 @@ Dự án Quản lý Khách hàng bằng Blazor .NET 8
 
 NET 8
 Blazor: Server-side, WebAssembly
+
 Cơ sở dữ liệu: SQL Server
+
 Các thư viện, framework khác Entity Framework, AutoMapper, JWT,....
+
+
 
 Biểu đồ kiến trúc:
 Server-client
@@ -19,4 +23,17 @@ CRUD: Mô tả chi tiết các chức năng CRUD (Tạo, Đọc, Cập nhật, X
 In ấn: Giải thích cách thực hiện in ấn (in trực tiếp, tạo file PDF).
 
 Xuất PDF: Chi tiết các định dạng PDF được hỗ trợ và cách xuất file.
+
+Các Nghiệp Vụ:
+
+Login/Register/Logout:
+
+-Xử Lý Jwt,Claim and Token
+
+-Authentication và Authorizication
+
+Thêm và Quản lý Employee và Department
+
+-Bar Chart and Table hiển thị
+
 
