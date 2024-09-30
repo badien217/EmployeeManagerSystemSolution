@@ -1,39 +1,53 @@
-Dự án Quản lý Khách hàng bằng Blazor .NET 8
+# 🧑‍💼 Customer Management Project with Blazor .NET 8
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/b3dfda06-444e-4aa0-887d-8817cc372b8b" alt="Blazor .NET 8 Customer Management Project" width="800"/>
+</p>
 
-![image](https://github.com/user-attachments/assets/b3dfda06-444e-4aa0-887d-8817cc372b8b)
+This project is a comprehensive **Customer Management System** built using **Blazor .NET 8**, offering a rich set of features designed for managing customer data effectively and efficiently.
 
-NET 8
-Blazor: Server-side, WebAssembly
+## 🚀 Technologies Used
 
-Cơ sở dữ liệu: SQL Server
+- **.NET 8**
+- **Blazor**: Supporting both **Server-side** and **WebAssembly** models for flexible deployment.
+- **SQL Server**: Reliable and scalable database management.
+- **Entity Framework**: Streamlining data access with an object-relational mapper (ORM).
+- **AutoMapper**: Simplifying object mapping between layers.
+- **JWT (JSON Web Token)**: For secure authentication and authorization.
 
-Các thư viện, framework khác Entity Framework, AutoMapper, JWT,....
+### Architecture Overview
 
+The project follows a **Server-Client** architecture, leveraging Blazor's ability to run on both the server and the client side with WebAssembly, providing a responsive and smooth user experience.
 
+## 🛠️ Key Features
 
-Biểu đồ kiến trúc:
-Server-client
+### CRUD Operations
 
+- **Create, Read, Update, Delete (CRUD)**: Complete functionality for managing core entities like **Customers**, **Employees**, and **Departments**. This includes form handling, validation, and seamless database interactions.
+  
+### Print and PDF Export
 
-Các tính năng chính
+- **Printing**: Users can directly print reports or customer data from the system with an integrated print feature.
+- **PDF Export**: Supports exporting documents in various PDF formats, ensuring data can be shared and archived easily. This includes customer reports, invoices, and more.
 
-CRUD: Mô tả chi tiết các chức năng CRUD (Tạo, Đọc, Cập nhật, Xóa) đối với các đối tượng chính trong dự án.
+### Authentication and Authorization
 
-In ấn: Giải thích cách thực hiện in ấn (in trực tiếp, tạo file PDF).
+- **Login/Register/Logout**: Secure user authentication with JWT (JSON Web Tokens) for handling **Claims** and **Tokens**.
+- **Authorization**: Role-based access control to ensure secure and restricted access to sensitive operations.
 
-Xuất PDF: Chi tiết các định dạng PDF được hỗ trợ và cách xuất file.
+### Employee and Department Management
 
-Các Nghiệp Vụ:
+- **Employee Management**: Add, update, and manage employee records, track performance, and assign roles within the organization.
+- **Department Management**: Oversee department structures, add new departments, and manage department-level activities.
 
-Login/Register/Logout:
+### Data Visualization
 
--Xử Lý Jwt,Claim and Token
+- **Bar Chart and Table Display**: View key metrics and data in a visually intuitive way with bar charts and tables. Ideal for viewing employee performance, department data, or customer trends.
 
--Authentication và Authorizication
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/chart-example-url" alt="Bar Chart Example" width="800"/>
+</p>
 
-Thêm và Quản lý Employee và Department
+---
 
--Bar Chart and Table hiển thị
-
-
+This project provides a robust and scalable system for customer management, utilizing modern web technologies with Blazor and .NET 8 for a rich, interactive experience.
